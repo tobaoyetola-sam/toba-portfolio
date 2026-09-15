@@ -331,10 +331,10 @@
       <div class="console">
         <div class="console-bar">
           <span class="console-dot r"></span><span class="console-dot y"></span><span class="console-dot g"></span>
-          <span class="console-title">deploy · paylater-api-v2 (blue/green)</span>
+          <span class="console-title">deploy · aricxpoint-api-v2 (blue/green)</span>
         </div>
         <div class="console-body">
-          <div class="console-cmd"><span class="prompt">$</span>ecs deploy --service paylater-api-v2 --strategy blue-green</div>
+          <div class="console-cmd"><span class="prompt">$</span>ecs deploy --service aricxpoint-api-v2 --strategy blue-green</div>
           <div class="console-log" id="consoleLog">
             <div class="console-line" data-line>provisioning green target group…</div>
             <div class="console-line" data-line>running health checks <span class="ok">12/12 passing</span></div>
@@ -482,7 +482,7 @@
           <text class="dg-title" x="605" y="254" text-anchor="middle">Target Group: GREEN</text>
           <text class="dg-sub" x="605" y="269" text-anchor="middle">new · scaling up</text>
 
-          <text class="dg-sub" x="510" y="355" text-anchor="middle">paylater-api-v2 · business-banking-backend · repayments</text>
+          <text class="dg-sub" x="510" y="355" text-anchor="middle">aricxpoint-api-v2 · business-banking-backend · repayments</text>
 
           <polyline class="dg-arrow" points="480,153 480,205 415,205 415,230" marker-end="url(#arrow)"/>
           <text class="dg-label" x="425" y="200">0% traffic</text>
@@ -728,7 +728,7 @@
       <h2 style="margin-bottom:0;">Wiring CI into mobile E2E testing</h2>
       <div class="case-status">IN PROGRESS · PILOTING ON iOS</div>
     </div>
-    <div class="case-sub">mobile-maestro-automation: QA's Maestro E2E suite for Carbon's iOS (carbon-ios-app) and Android (paylater-android) apps</div>
+    <div class="case-sub">mobile-maestro-automation: QA's Maestro E2E suite for Carbon's iOS (carbon-ios-app) and Android (aricxpoint-android) apps</div>
     <div class="case-grid">
       <div class="case-block">
         <h3>The problem</h3>
@@ -738,7 +738,7 @@
         <h3>What made it hard</h3>
         <ul>
           <li><b>No hosted runner would do it.</b> iOS needs macOS + Xcode + a simulator; Android needs an SDK + emulator. Neither is possible on Bitbucket Cloud's hosted Linux runners, so this meant standing up self-hosted runners first.</li>
-          <li><b>Trigger model wasn't obvious.</b> Gate the app repos directly (carbon-ios-app / paylater-android) post-build, or run a self-contained pipeline in the test repo that builds both apps itself. A real architecture decision, not a config tweak.</li>
+          <li><b>Trigger model wasn't obvious.</b> Gate the app repos directly (carbon-ios-app / aricxpoint-android) post-build, or run a self-contained pipeline in the test repo that builds both apps itself. A real architecture decision, not a config tweak.</li>
           <li><b>Android had no equivalent tag.</b> Only iOS had a stability-gated <code>ci</code> tag; Android only had smoke/manual, so gating it the same way needed a decision with QA first.</li>
         </ul>
       </div>
