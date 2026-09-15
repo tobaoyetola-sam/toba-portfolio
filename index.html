@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Toba Oyetola — DevOps Engineer | SRE | Solution Architect</title>
+<title>Toba Oyetola | DevOps Engineer | SRE | Solution Architect</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -319,7 +319,7 @@
     <div class="eyebrow"><span class="dot"></span> Open to select opportunities</div>
     <h1>Toba Oyetola keeps <span class="accent">production</span> up.</h1>
     <div class="role-line"><b>DevOps Engineer</b><span class="role-sep">·</span><b>SRE</b><span class="role-sep">·</span><b>Solution Architect</b></div>
-    <p class="lede">Six years running TechOps for a fintech platform — AWS, Terraform, and ECS blue/green deployments on one side, PCI-DSS compliance and network security on the other. 568 tickets shipped, zero shortcuts on uptime.</p>
+    <p class="lede">Six years running TechOps for a fintech platform: AWS, Terraform, and ECS blue/green deployments on one side, PCI-DSS compliance and network security on the other. 568 tickets shipped, zero shortcuts on uptime.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#projects">See the work →</a>
       <a class="btn btn-ghost" href="#connect">Get in touch</a>
@@ -331,7 +331,7 @@
       <div class="console">
         <div class="console-bar">
           <span class="console-dot r"></span><span class="console-dot y"></span><span class="console-dot g"></span>
-          <span class="console-title">deploy — paylater-api-v2 (blue/green)</span>
+          <span class="console-title">deploy · paylater-api-v2 (blue/green)</span>
         </div>
         <div class="console-body">
           <div class="console-cmd"><span class="prompt">$</span>ecs deploy --service paylater-api-v2 --strategy blue-green</div>
@@ -341,7 +341,7 @@
             <div class="console-line" data-line>shifting traffic <span class="pct">0% → 100%</span></div>
             <div class="console-line" data-line>draining blue target group…</div>
           </div>
-          <div class="console-status" id="consoleStatus"><span class="ok">✓ cutover complete</span> — 0s downtime</div>
+          <div class="console-status" id="consoleStatus"><span class="ok">✓ cutover complete</span> · 0s downtime</div>
         </div>
       </div>
       <div style="display:flex; justify-content:center;">
@@ -365,8 +365,8 @@
       </div>
       <h2>Started in network support. Now I own the platform.</h2>
       <div class="about-text">
-        <p>I joined TechOps handling VPN setups, workstation audits, and AD hygiene for a growing fintech team. Over six years that grew into owning the infrastructure it runs on: I designed the production architecture, containerized close to 120 services across Docker, ECS Fargate, and EKS, and built the CI/CD pipelines that promote them through dev, staging, and prod — plus the event-driven automation (image-update watchers, deployment triggers, alerting) that keeps the whole thing running without someone babysitting it.</p>
-        <p>The other half of the job is trust — PCI-DSS reviews of the Cardholder Data Environment, network segmentation, VPN-only access to every dashboard, and the SSL/certificate hygiene that keeps a lending platform compliant. I've logged 568 tickets across both sides of that work, 530 of them closed out.</p>
+        <p>I joined TechOps handling VPN setups, workstation audits, and AD hygiene for a growing fintech team. Over six years that grew into owning the infrastructure it runs on: I designed the production architecture, containerized close to 120 services across Docker, ECS Fargate, and EKS, and built the CI/CD pipelines that promote them through dev, staging, and prod, plus the event-driven automation (image-update watchers, deployment triggers, alerting) that keeps the whole thing running without someone babysitting it.</p>
+        <p>The other half of the job is trust: PCI-DSS reviews of the Cardholder Data Environment, network segmentation, VPN-only access to every dashboard, and the SSL/certificate hygiene that keeps a lending platform compliant. I've logged 568 tickets across both sides of that work, 530 of them closed out.</p>
       </div>
     </div>
     <div class="stat-list">
@@ -492,7 +492,7 @@
           <rect class="dg-zone-cde" x="320" y="405" width="380" height="205" rx="6"/>
           <text class="dg-zone-label-cde" x="330" y="420">CDE · PCI-DSS SEGMENTED SUBNET</text>
           <rect class="dg-box-warn" x="410" y="450" width="200" height="58" rx="6"/>
-          <text class="dg-title" x="510" y="472" text-anchor="middle">RDS — Cardholder Data</text>
+          <text class="dg-title" x="510" y="472" text-anchor="middle">RDS · Cardholder Data</text>
           <text class="dg-sub" x="510" y="487" text-anchor="middle">quarterly ACL / SG audit</text>
 
           <line class="dg-arrow" x1="510" y1="292" x2="510" y2="448" marker-end="url(#arrow)"/>
@@ -544,14 +544,14 @@
 
           <!-- Terraform bar -->
           <rect class="dg-box" x="15" y="650" width="1005" height="35" rx="6"/>
-          <text class="dg-title-sm" x="517" y="672" text-anchor="middle">Terraform + TerraformOps AI — provisions the VPC/ECS/CDE and enforces tagging &amp; IAM standards</text>
+          <text class="dg-title-sm" x="517" y="672" text-anchor="middle">Terraform + TerraformOps AI: provisions the VPC/ECS/CDE and enforces tagging &amp; IAM standards</text>
 
           <line class="dg-arrow-dashed" x1="450" y1="650" x2="450" y2="612" marker-end="url(#arrow)"/>
           <line class="dg-arrow-dashed" x1="890" y1="650" x2="890" y2="602" marker-end="url(#arrow)"/>
         </svg>
       </figure>
     </div>
-    <figcaption class="dg-caption">How a commit becomes a safe production deploy: Bitbucket builds a Golden Image, ECS runs a native blue/green cutover behind the ALB, cardholder data stays walled off in a PCI-DSS-segmented subnet, and every dashboard is reachable only through the VPN — all of it provisioned by Terraform.</figcaption>
+    <figcaption class="dg-caption">How a commit becomes a safe production deploy: Bitbucket builds a Golden Image, ECS runs a native blue/green cutover behind the ALB, cardholder data stays walled off in a PCI-DSS-segmented subnet, and every dashboard is reachable only through the VPN, all of it provisioned by Terraform.</figcaption>
   </div>
 </section>
 
@@ -590,7 +590,7 @@
           <div class="tl-role">Observability &amp; Compliance Hardening</div>
           <div class="tl-meta">2024 · GRAFANA · PROMETHEUS · PCI-DSS</div>
           <ul class="tl-desc">
-            <li>Audited and locked the observability stack — Grafana, Prometheus, Node Exporter, Uptime Kuma — behind VPN-only access.</li>
+            <li>Audited and locked the observability stack (Grafana, Prometheus, Node Exporter, Uptime Kuma) behind VPN-only access.</li>
             <li>Led recurring PCI-DSS reviews of the Cardholder Data Environment: architecture, ACLs, and asset inventory.</li>
             <li>Picked up the SRE label formally as on-call and monitoring work took a larger share of the role.</li>
           </ul>
@@ -626,7 +626,7 @@
           </div>
           <div class="proj-status prod">PROD</div>
         </div>
-        <div class="proj-desc">Designed the production architecture and containerized close to 120 services across Docker, ECS Fargate, and Amazon EKS — including ingress controllers and auto-scaling policies that improved resilience and performance.</div>
+        <div class="proj-desc">Designed the production architecture and containerized close to 120 services across Docker, ECS Fargate, and Amazon EKS, including ingress controllers and auto-scaling policies that improved resilience and performance.</div>
       </div>
 
       <div class="project-card">
@@ -637,7 +637,7 @@
           </div>
           <div class="proj-status prod">−40% PROVISIONING TIME</div>
         </div>
-        <div class="proj-desc">Architected Terraform-based network segmentation across Staging, the PCI-DSS CDE, and Production, enforcing strict isolation through CI/CD-only deployments with approval gates — cutting manual provisioning time by 40%.</div>
+        <div class="proj-desc">Architected Terraform-based network segmentation across Staging, the PCI-DSS CDE, and Production, enforcing strict isolation through CI/CD-only deployments with approval gates, cutting manual provisioning time by 40%.</div>
       </div>
 
       <div class="project-card">
@@ -648,7 +648,7 @@
           </div>
           <div class="proj-status prod">PROD</div>
         </div>
-        <div class="proj-desc">Built a production-grade, zero-downtime Blue/Green pipeline with header-based ALB routing, letting QA validate the GREEN environment before cutover — running across Wallet, Payment, Transaction, and Debit services.</div>
+        <div class="proj-desc">Built a production-grade, zero-downtime Blue/Green pipeline with header-based ALB routing, letting QA validate the GREEN environment before cutover, running across Wallet, Payment, Transaction, and Debit services.</div>
       </div>
 
       <div class="project-card">
@@ -659,7 +659,7 @@
           </div>
           <div class="proj-status prod">VERIFIED 50/50</div>
         </div>
-        <div class="proj-desc">Implemented weighted DNS routing across ECS Fargate and EKS for a controlled platform migration, provisioned via Terraform with ALB access logs shipped to S3 for audit — verified at a 50/50 split across 1,000-request load tests.</div>
+        <div class="proj-desc">Implemented weighted DNS routing across ECS Fargate and EKS for a controlled platform migration, provisioned via Terraform with ALB access logs shipped to S3 for audit, verified at a 50/50 split across 1,000-request load tests.</div>
       </div>
 
       <div class="project-card">
@@ -670,7 +670,7 @@
           </div>
           <div class="proj-status ongoing">ONGOING</div>
         </div>
-        <div class="proj-desc">Led SRE initiatives for payment systems — SLO-driven reliability models and end-to-end observability (Grafana, Prometheus, Uptime Kuma, CloudWatch, all VPN-only) that cut operational toil and sped up incident response.</div>
+        <div class="proj-desc">Led SRE initiatives for payment systems: SLO-driven reliability models and end-to-end observability (Grafana, Prometheus, Uptime Kuma, CloudWatch, all VPN-only) that cut operational toil and sped up incident response.</div>
       </div>
 
       <div class="project-card">
@@ -681,7 +681,7 @@
           </div>
           <div class="proj-status ongoing">ONGOING</div>
         </div>
-        <div class="proj-desc">Embedded DevSecOps into the SDLC — IAM policy design, secrets management, automated vulnerability scanning, and static code analysis in CI/CD — plus event-driven automation for image updates and alert routing.</div>
+        <div class="proj-desc">Embedded DevSecOps into the SDLC: IAM policy design, secrets management, automated vulnerability scanning, and static code analysis in CI/CD, plus event-driven automation for image updates and alert routing.</div>
       </div>
 
       <div class="project-card">
@@ -692,7 +692,7 @@
           </div>
           <div class="proj-status prod">PROD</div>
         </div>
-        <div class="proj-desc">Designed and stood up CI/CD pipelines promoting services through dev, staging, and prod on standardized Golden Base Docker images — partnering with teams shipping Java, Python, and Node.js to minimize downtime and stabilize builds.</div>
+        <div class="proj-desc">Designed and stood up CI/CD pipelines promoting services through dev, staging, and prod on standardized Golden Base Docker images, partnering with teams shipping Java, Python, and Node.js to minimize downtime and stabilize builds.</div>
       </div>
 
       <div class="project-card">
@@ -703,7 +703,7 @@
           </div>
           <div class="proj-status ongoing">RECURRING</div>
         </div>
-        <div class="proj-desc">Own the recurring review cycle for the Cardholder Data Environment — architecture reviews, security-group reconciliation against live AWS state, and asset inventory sign-off.</div>
+        <div class="proj-desc">Own the recurring review cycle for the Cardholder Data Environment: architecture reviews, security-group reconciliation against live AWS state, and asset inventory sign-off.</div>
       </div>
 
       <div class="project-card">
@@ -728,23 +728,23 @@
       <h2 style="margin-bottom:0;">Wiring CI into mobile E2E testing</h2>
       <div class="case-status">IN PROGRESS · PILOTING ON iOS</div>
     </div>
-    <div class="case-sub">mobile-maestro-automation — QA's Maestro E2E suite for Carbon's iOS (carbon-ios-app) and Android (paylater-android) apps</div>
+    <div class="case-sub">mobile-maestro-automation: QA's Maestro E2E suite for Carbon's iOS (carbon-ios-app) and Android (paylater-android) apps</div>
     <div class="case-grid">
       <div class="case-block">
         <h3>The problem</h3>
-        <p>QA's Maestro flow-authoring was mature — organized by squad, tagged, stability-gated, with a <code>ci</code> tag already defined as "the curated subset the pipeline runs on every PR" and a JUnit→Allure reporting script sitting ready. But no pipeline had ever been wired up to use any of it. Every run was still manual, on someone's machine.</p>
+        <p>QA's Maestro flow-authoring was mature, organized by squad, tagged, stability-gated, with a <code>ci</code> tag already defined as "the curated subset the pipeline runs on every PR" and a JUnit→Allure reporting script sitting ready. But no pipeline had ever been wired up to use any of it. Every run was still manual, on someone's machine.</p>
       </div>
       <div class="case-block">
         <h3>What made it hard</h3>
         <ul>
-          <li><b>No hosted runner would do it.</b> iOS needs macOS + Xcode + a simulator; Android needs an SDK + emulator — neither is possible on Bitbucket Cloud's hosted Linux runners, so this meant standing up self-hosted runners first.</li>
-          <li><b>Trigger model wasn't obvious.</b> Gate the app repos directly (carbon-ios-app / paylater-android) post-build, or run a self-contained pipeline in the test repo that builds both apps itself — a real architecture decision, not a config tweak.</li>
+          <li><b>No hosted runner would do it.</b> iOS needs macOS + Xcode + a simulator; Android needs an SDK + emulator. Neither is possible on Bitbucket Cloud's hosted Linux runners, so this meant standing up self-hosted runners first.</li>
+          <li><b>Trigger model wasn't obvious.</b> Gate the app repos directly (carbon-ios-app / paylater-android) post-build, or run a self-contained pipeline in the test repo that builds both apps itself. A real architecture decision, not a config tweak.</li>
           <li><b>Android had no equivalent tag.</b> Only iOS had a stability-gated <code>ci</code> tag; Android only had smoke/manual, so gating it the same way needed a decision with QA first.</li>
         </ul>
       </div>
       <div class="case-block case-full">
         <h3>Approach</h3>
-        <p>Scoped the two blocking decisions before writing any pipeline code, then piloted iOS first since it was already stability-gated: build the app → <code>scripts/maestro-test.sh &lt;env-file&gt; ios --include-tags ci --format junit --output report.xml</code> → <code>scripts/allure-regroup.py</code> to regroup results → publish as an Allure report grouped by <b>platform · squad</b>. Test-identity secrets (<code>TEST_*</code> / <code>MAESTRO_*</code>), previously only in 1Password, get provisioned as secured pipeline variables rather than checked-in config. Android extends the same pattern once QA agrees on its tag convention — documented as a handoff rather than blocking the iOS pilot on it.</p>
+        <p>Scoped the two blocking decisions before writing any pipeline code, then piloted iOS first since it was already stability-gated: build the app → <code>scripts/maestro-test.sh &lt;env-file&gt; ios --include-tags ci --format junit --output report.xml</code> → <code>scripts/allure-regroup.py</code> to regroup results → publish as an Allure report grouped by <b>platform · squad</b>. Test-identity secrets (<code>TEST_*</code> / <code>MAESTRO_*</code>), previously only in 1Password, get provisioned as secured pipeline variables rather than checked-in config. Android extends the same pattern once QA agrees on its tag convention, documented as a handoff rather than blocking the iOS pilot on it.</p>
       </div>
     </div>
   </div>
@@ -755,7 +755,7 @@
     <div>
       <div class="section-label">Connect</div>
       <h2>Let's talk infrastructure.</h2>
-      <p style="color:var(--text-dim); max-width:50ch;">Open to DevOps, SRE, and solution architecture conversations — reach out on any of these.</p>
+      <p style="color:var(--text-dim); max-width:50ch;">Open to DevOps, SRE, and solution architecture conversations. Reach out on any of these.</p>
     </div>
     <div class="connect-row">
       <a class="btn btn-primary" href="mailto:soyetola@getcarbon.co">Email →</a>
