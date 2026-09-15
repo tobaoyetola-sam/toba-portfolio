@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toba Oyetola — DevOps Engineer | SRE | Solution Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0f1a;
+    --surface: #111927;
+    --surface-2: #17233a;
+    --line: #223052;
+    --text: #e7ecf7;
+    --text-dim: #8494b8;
+    --accent: #2dd4bf;
+    --accent-soft: rgba(45,212,191,0.12);
+    --warn: #f5a623;
+    --warn-soft: rgba(245,166,35,0.14);
+    --ok: #34d399;
+    --ok-soft: rgba(52,211,153,0.15);
+    --display: 'IBM Plex Sans', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent); color:#04140f;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  h1,h2,h3{text-wrap:balance;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,15,26,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:62px;}
+  .brand{font-family:var(--mono); font-size:14px; letter-spacing:0.01em; color:var(--text);}
+  .brand span{color:var(--accent);}
+  .navlinks{display:flex; gap:26px; font-family:var(--mono); font-size:12.5px; color:var(--text-dim);}
+  .navlinks a{transition:color .2s ease;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text);}
+  .navlinks a:focus-visible{outline:2px solid var(--accent); outline-offset:4px; border-radius:2px;}
+  @media (max-width:640px){ .navlinks{display:none;} }
+
+  /* HERO */
+  .hero{
+    padding:76px 0 88px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:52px;
+    align-items:center;
+  }
+  @media (max-width:880px){ .hero{grid-template-columns:1fr; padding:48px 0 56px;} }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--ok);
+    display:flex; align-items:center; gap:8px; margin-bottom:20px;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px var(--ok-soft);}
+
+  h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(2.1rem, 4.6vw, 3.15rem);
+    line-height:1.12; letter-spacing:-0.015em;
+    margin-bottom:18px;
+  }
+  h1 .accent{color:var(--accent);}
+
+  .role-line{
+    font-family:var(--mono); font-size:13px; color:var(--text-dim);
+    margin-bottom:18px; display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center;
+  }
+  .role-line b{color:var(--text); font-weight:500;}
+  .role-sep{color:var(--line);}
+
+  .lede{color:var(--text-dim); font-size:1.02rem; max-width:48ch; margin-bottom:30px;}
+
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px;
+    padding:11px 18px; border-radius:7px;
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+    transition:border-color .2s ease, background .2s ease, transform .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .btn-primary{background:var(--accent); border-color:var(--accent); color:#04140f; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-1px); background:#4de0cc;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-dim); transform:translateY(-1px);}
+
+  /* DEPLOY CONSOLE — signature element */
+  .console-stage{display:flex; justify-content:center;}
+  .console{
+    width:100%; max-width:380px;
+    background:#0d1420;
+    border-radius:12px;
+    border:1px solid var(--line);
+    box-shadow:0 30px 70px -30px rgba(45,212,191,0.18), 0 10px 30px rgba(0,0,0,0.45);
+    overflow:hidden;
+  }
+  .console-bar{
+    height:34px; display:flex; align-items:center; gap:7px;
+    padding:0 14px; background:var(--surface); border-bottom:1px solid var(--line);
+  }
+  .console-dot{width:9px; height:9px; border-radius:50%;}
+  .console-dot.r{background:#f87171;} .console-dot.y{background:#f5a623;} .console-dot.g{background:#34d399;}
+  .console-title{
+    font-family:var(--mono); font-size:10.5px; color:var(--text-dim);
+    margin-left:6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .console-body{
+    padding:16px 16px 14px; min-height:260px;
+    font-family:var(--mono); font-size:11.5px; line-height:1.8;
+    display:flex; flex-direction:column;
+  }
+  .console-cmd{color:var(--text); margin-bottom:10px;}
+  .console-cmd .prompt{color:var(--accent); margin-right:6px;}
+  .console-log{flex:1; display:flex; flex-direction:column; gap:6px;}
+  .console-line{color:var(--text-dim); opacity:0; transform:translateY(3px); transition:opacity .25s ease, transform .25s ease;}
+  .console-line.show{opacity:1; transform:translateY(0);}
+  .console-line .ok{color:var(--ok);}
+  .console-line .pct{color:var(--warn); font-weight:600;}
+  .console-status{
+    margin-top:10px; padding-top:10px; border-top:1px dashed var(--line);
+    font-family:var(--mono); font-size:11.5px; color:var(--text-dim); opacity:0; transition:opacity .3s ease;
+  }
+  .console-status.show{opacity:1;}
+  .console-status .ok{color:var(--ok); font-weight:600;}
+  .replay-btn{
+    margin-top:12px; align-self:flex-start;
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    border:1px solid var(--accent-soft); background:var(--accent-soft);
+    padding:6px 12px; border-radius:6px; cursor:pointer;
+    transition:background .2s ease;
+  }
+  .replay-btn:hover{background:rgba(45,212,191,0.22);}
+  .replay-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .hint{font-family:var(--mono); font-size:11px; color:var(--text-dim); text-align:center; margin-top:12px;}
+
+  /* SECTION SHARED */
+  section{padding:64px 0; border-top:1px solid var(--line);}
+  .section-label{
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    letter-spacing:0.07em; text-transform:uppercase; margin-bottom:12px;
+  }
+  h2{font-family:var(--display); font-weight:700; font-size:clamp(1.4rem,2.6vw,1.85rem); margin-bottom:26px;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.25fr 0.75fr; gap:48px;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr; gap:32px;} }
+  .about-id{display:flex; align-items:center; gap:16px; margin-bottom:22px;}
+  .avatar-photo{
+    width:64px; height:64px; border-radius:50%; object-fit:cover;
+    border:2px solid var(--line); box-shadow:0 0 0 3px var(--accent-soft);
+    flex-shrink:0;
+  }
+  .about-id-name{font-family:var(--display); font-weight:600; font-size:1rem; color:var(--text);}
+  .about-id-role{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); margin-top:2px;}
+  .about-text{color:var(--text-dim); font-size:1rem; max-width:62ch;}
+  .about-text p + p{margin-top:14px;}
+  .stat-list{display:flex; flex-direction:column; gap:16px;}
+  .stat{border-left:2px solid var(--accent); padding-left:16px;}
+  .stat-num{font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); font-variant-numeric:tabular-nums;}
+  .stat-label{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:2px;}
+
+  /* SKILLS */
+  .skill-groups{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+  @media (max-width:760px){ .skill-groups{grid-template-columns:1fr;} }
+  .skill-group h3{font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px;}
+  .tag-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px;
+    padding:6px 11px; border-radius:6px;
+    background:var(--surface); border:1px solid var(--line); color:var(--text);
+  }
+
+  /* ARCHITECTURE DIAGRAM */
+  .diagram-figure{margin:0;}
+  .diagram-svg{width:100%; height:auto; display:block;}
+  .diagram-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface);}
+  .dg-zone{fill:none; stroke:var(--line); stroke-width:1.2;}
+  .dg-zone-dashed{fill:none; stroke:var(--line); stroke-width:1; stroke-dasharray:5 4;}
+  .dg-zone-cde{fill:none; stroke:var(--warn); stroke-width:1.2; stroke-dasharray:5 4;}
+  .dg-zone-label{font-family:var(--mono); font-size:10px; fill:var(--text-dim); letter-spacing:.06em;}
+  .dg-zone-label-cde{font-family:var(--mono); font-size:10px; fill:var(--warn); letter-spacing:.06em;}
+  .dg-box{fill:var(--surface-2); stroke:var(--line); stroke-width:1.2;}
+  .dg-box-accent{fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.3;}
+  .dg-box-warn{fill:var(--warn-soft); stroke:var(--warn); stroke-width:1.3;}
+  .dg-box-ok{fill:var(--ok-soft); stroke:var(--ok); stroke-width:1.3;}
+  .dg-title-sm{font-family:var(--display); font-weight:600; font-size:11.5px; fill:var(--text);}
+  .dg-title{font-family:var(--display); font-weight:600; font-size:12px; fill:var(--text);}
+  .dg-sub{font-family:var(--mono); font-size:9.5px; fill:var(--text-dim);}
+  .dg-arrow{stroke:var(--text-dim); stroke-width:1.3; fill:none;}
+  .dg-arrow-accent{stroke:var(--accent); stroke-width:1.6; fill:none;}
+  .dg-arrow-ok{stroke:var(--ok); stroke-width:1.6; fill:none;}
+  .dg-arrow-dashed{stroke:var(--text-dim); stroke-width:1; fill:none; stroke-dasharray:4 4;}
+  .dg-label{font-family:var(--mono); font-size:9.5px; fill:var(--text-dim);}
+  .dg-label-accent{font-family:var(--mono); font-size:9.5px; fill:var(--accent);}
+  .dg-label-ok{font-family:var(--mono); font-size:9.5px; fill:var(--ok);}
+  .dg-arrowhead{fill:var(--text-dim);}
+  .dg-arrowhead-accent{fill:var(--accent);}
+  .dg-arrowhead-ok{fill:var(--ok);}
+  figcaption.dg-caption{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); margin-top:14px; max-width:70ch;}
+
+  /* EXPERIENCE */
+  .timeline{display:flex; flex-direction:column; gap:0;}
+  .tl-item{display:grid; grid-template-columns:34px 1fr; gap:20px; padding-bottom:30px; position:relative;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-marker{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--accent);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; background:var(--accent-soft);
+  }
+  .tl-item:not(:last-child)::before{
+    content:''; position:absolute; left:16px; top:34px; bottom:0; width:1px; background:var(--line);
+  }
+  .tl-role{font-weight:600; font-size:1rem;}
+  .tl-meta{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin:4px 0 10px;}
+  .tl-desc{color:var(--text-dim); max-width:62ch; font-size:.95rem;}
+  .tl-desc li{margin-left:1.1em; margin-bottom:4px;}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+  @media (max-width:900px){ .project-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:640px){ .project-grid{grid-template-columns:1fr;} }
+  .project-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:20px; display:flex; flex-direction:column; gap:12px;
+    transition:border-color .2s ease, transform .18s ease;
+  }
+  .project-card:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .proj-top{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+  .proj-top > div:first-child{flex:1; min-width:0;}
+  .proj-title{font-family:var(--display); font-weight:600; font-size:1.02rem;}
+  .proj-tag{font-family:var(--mono); font-size:10px; color:var(--text-dim); margin-top:4px;}
+  .proj-status{
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.02em;
+    padding:3px 8px; border-radius:5px; white-space:nowrap; flex-shrink:0;
+  }
+  .proj-status.prod{color:var(--ok); border:1px solid rgba(52,211,153,0.35); background:var(--ok-soft);}
+  .proj-status.ongoing{color:var(--warn); border:1px solid rgba(245,166,35,0.35); background:var(--warn-soft);}
+  .proj-desc{color:var(--text-dim); font-size:.9rem; flex:1;}
+
+  /* CASE STUDY */
+  .case-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:8px;}
+  .case-status{
+    font-family:var(--mono); font-size:10px; letter-spacing:.03em;
+    color:var(--warn); border:1px solid rgba(245,166,35,0.35); background:var(--warn-soft);
+    padding:4px 10px; border-radius:6px; white-space:nowrap; flex-shrink:0; margin-top:4px;
+  }
+  .case-sub{font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-bottom:32px; max-width:70ch;}
+  .case-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:28px 40px;}
+  @media (max-width:760px){ .case-grid{grid-template-columns:1fr; gap:28px;} }
+  .case-block h3{
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;
+  }
+  .case-block p{color:var(--text-dim); font-size:.93rem; max-width:56ch;}
+  .case-block p + p{margin-top:10px;}
+  .case-block ul{color:var(--text-dim); font-size:.93rem; max-width:56ch; padding-left:1.1em;}
+  .case-block li{margin-bottom:6px;}
+  .case-block li b{color:var(--text); font-weight:600;}
+  .case-block code{
+    font-family:var(--mono); font-size:.86em; color:var(--text);
+    background:var(--surface-2); padding:1px 6px; border-radius:4px;
+  }
+  .case-full{grid-column:1 / -1;}
+
+  /* CONNECT */
+  .connect{
+    display:flex; flex-direction:column; align-items:flex-start; gap:24px;
+  }
+  .connect-row{display:flex; gap:12px; flex-wrap:wrap;}
+  footer{
+    border-top:1px solid var(--line); padding:26px 0;
+    font-family:var(--mono); font-size:11px; color:var(--text-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">toba<span>.</span>ops</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#case-study">Case Study</a>
+      <a href="#connect">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> Open to select opportunities</div>
+    <h1>Toba Oyetola keeps <span class="accent">production</span> up.</h1>
+    <div class="role-line"><b>DevOps Engineer</b><span class="role-sep">·</span><b>SRE</b><span class="role-sep">·</span><b>Solution Architect</b></div>
+    <p class="lede">Six years running TechOps for a fintech platform — AWS, Terraform, and ECS blue/green deployments on one side, PCI-DSS compliance and network security on the other. 568 tickets shipped, zero shortcuts on uptime.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">See the work →</a>
+      <a class="btn btn-ghost" href="#connect">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="console-stage">
+    <div>
+      <div class="console">
+        <div class="console-bar">
+          <span class="console-dot r"></span><span class="console-dot y"></span><span class="console-dot g"></span>
+          <span class="console-title">deploy — paylater-api-v2 (blue/green)</span>
+        </div>
+        <div class="console-body">
+          <div class="console-cmd"><span class="prompt">$</span>ecs deploy --service paylater-api-v2 --strategy blue-green</div>
+          <div class="console-log" id="consoleLog">
+            <div class="console-line" data-line>provisioning green target group…</div>
+            <div class="console-line" data-line>running health checks <span class="ok">12/12 passing</span></div>
+            <div class="console-line" data-line>shifting traffic <span class="pct">0% → 100%</span></div>
+            <div class="console-line" data-line>draining blue target group…</div>
+          </div>
+          <div class="console-status" id="consoleStatus"><span class="ok">✓ cutover complete</span> — 0s downtime</div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:center;">
+        <button class="replay-btn" id="replayBtn" type="button">↻ replay cutover</button>
+      </div>
+      <div class="hint">a real (staged) ECS blue/green rollout, not a screenshot</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-label">About</div>
+      <div class="about-id">
+        <img class="avatar-photo" src="assets/toba.jpg" alt="Toba Oyetola" onerror="this.style.display='none'">
+        <div>
+          <div class="about-id-name">Toba Oyetola</div>
+          <div class="about-id-role">DevOps Engineer · SRE · Solution Architect</div>
+        </div>
+      </div>
+      <h2>Started in network support. Now I own the platform.</h2>
+      <div class="about-text">
+        <p>I joined TechOps handling VPN setups, workstation audits, and AD hygiene for a growing fintech team. Over six years that grew into owning the infrastructure it runs on: I designed the production architecture, containerized close to 120 services across Docker, ECS Fargate, and EKS, and built the CI/CD pipelines that promote them through dev, staging, and prod — plus the event-driven automation (image-update watchers, deployment triggers, alerting) that keeps the whole thing running without someone babysitting it.</p>
+        <p>The other half of the job is trust — PCI-DSS reviews of the Cardholder Data Environment, network segmentation, VPN-only access to every dashboard, and the SSL/certificate hygiene that keeps a lending platform compliant. I've logged 568 tickets across both sides of that work, 530 of them closed out.</p>
+      </div>
+    </div>
+    <div class="stat-list">
+      <div class="stat">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Services containerized</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">568</div>
+        <div class="stat-label">Tickets shipped in TechOps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">530</div>
+        <div class="stat-label">Resolved to Done</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2021–26</div>
+        <div class="stat-label">Continuous ownership, no gaps</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-label">Stack</div>
+    <h2>What I reach for</h2>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Cloud &amp; Infra</h3>
+        <div class="tag-list">
+          <span class="tag">AWS</span><span class="tag">ECS Fargate</span><span class="tag">EKS / Kubernetes</span>
+          <span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">Route 53</span>
+          <span class="tag">VPC / Networking</span><span class="tag">Ubuntu</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Reliability &amp; Security</h3>
+        <div class="tag-list">
+          <span class="tag">PCI-DSS</span><span class="tag">CDE Audits</span><span class="tag">VPN</span>
+          <span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">CloudWatch</span>
+          <span class="tag">SLOs</span><span class="tag">IAM &amp; Secrets Mgmt</span><span class="tag">SAST / Vuln Scanning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Delivery &amp; Automation</h3>
+        <div class="tag-list">
+          <span class="tag">Blue/Green Deploys</span><span class="tag">CodePipeline / CodeBuild / CodeDeploy</span>
+          <span class="tag">Bitbucket CI/CD</span><span class="tag">Golden Images</span>
+          <span class="tag">Multi-Env Pipelines</span><span class="tag">Event-Driven Automation</span>
+          <span class="tag">Maestro E2E</span><span class="tag">TerraformOps AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-label">Architecture</div>
+    <h2>What a deploy actually touches</h2>
+    <div class="diagram-scroll">
+      <figure class="diagram-figure">
+        <svg class="diagram-svg" viewBox="0 0 1040 700" role="img" aria-label="A commit lands in Bitbucket, builds into a Golden Base Image, and deploys through an ECS native blue/green cutover behind an ALB. Production services sit in a private subnet, a PCI-DSS-segmented CDE subnet holds cardholder data, and every observability tool is reachable only through a VPN gateway. Terraform provisions the VPC, ECS, and CDE controls underneath all of it.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="dg-arrowhead"/></marker>
+            <marker id="arrowAccent" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="dg-arrowhead-accent"/></marker>
+            <marker id="arrowOk" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="dg-arrowhead-ok"/></marker>
+          </defs>
+
+          <!-- CI/CD lane -->
+          <rect class="dg-zone" x="15" y="40" width="260" height="600" rx="8"/>
+          <text class="dg-zone-label" x="27" y="58">CI/CD PIPELINE</text>
+
+          <rect class="dg-box" x="30" y="70" width="230" height="50" rx="6"/>
+          <text class="dg-title" x="145" y="92" text-anchor="middle">Bitbucket Repo</text>
+          <text class="dg-sub" x="145" y="107" text-anchor="middle">git push → main</text>
+
+          <rect class="dg-box" x="30" y="160" width="230" height="50" rx="6"/>
+          <text class="dg-title" x="145" y="182" text-anchor="middle">Golden Base Image</text>
+          <text class="dg-sub" x="145" y="197" text-anchor="middle">Docker · Node/PHP LTS</text>
+
+          <rect class="dg-box" x="30" y="250" width="230" height="50" rx="6"/>
+          <text class="dg-title" x="145" y="272" text-anchor="middle">CI Runner</text>
+          <text class="dg-sub" x="145" y="287" text-anchor="middle">Bitbucket Pipelines</text>
+
+          <line class="dg-arrow" x1="145" y1="120" x2="145" y2="158" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="152" y="143">build</text>
+          <line class="dg-arrow" x1="145" y1="210" x2="145" y2="248" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="152" y="233">base image</text>
+
+          <polyline class="dg-arrow-accent" points="260,275 300,275 300,266 338,266" marker-end="url(#arrowAccent)"/>
+          <text class="dg-label-accent" x="262" y="253">ecs deploy --strategy blue-green</text>
+
+          <!-- AWS VPC -->
+          <rect class="dg-zone" x="300" y="40" width="420" height="600" rx="8"/>
+          <text class="dg-zone-label" x="312" y="58">AWS VPC · PRODUCTION</text>
+
+          <rect class="dg-zone-dashed" x="320" y="78" width="380" height="100" rx="6"/>
+          <text class="dg-zone-label" x="330" y="93">PUBLIC SUBNET</text>
+          <rect class="dg-box" x="430" y="103" width="160" height="50" rx="6"/>
+          <text class="dg-title" x="510" y="125" text-anchor="middle">Application Load Balancer</text>
+          <text class="dg-sub" x="510" y="140" text-anchor="middle">public-facing</text>
+
+          <rect class="dg-zone-dashed" x="320" y="195" width="380" height="190" rx="6"/>
+          <text class="dg-zone-label" x="330" y="210">PRIVATE SUBNET · ECS CLUSTER</text>
+
+          <rect class="dg-box" x="340" y="232" width="150" height="58" rx="6"/>
+          <text class="dg-title" x="415" y="254" text-anchor="middle">Target Group: BLUE</text>
+          <text class="dg-sub" x="415" y="269" text-anchor="middle">current · draining</text>
+
+          <rect class="dg-box-accent" x="530" y="232" width="150" height="58" rx="6"/>
+          <text class="dg-title" x="605" y="254" text-anchor="middle">Target Group: GREEN</text>
+          <text class="dg-sub" x="605" y="269" text-anchor="middle">new · scaling up</text>
+
+          <text class="dg-sub" x="510" y="355" text-anchor="middle">paylater-api-v2 · business-banking-backend · repayments</text>
+
+          <polyline class="dg-arrow" points="480,153 480,205 415,205 415,230" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="425" y="200">0% traffic</text>
+          <polyline class="dg-arrow-accent" points="540,153 540,205 605,205 605,230" marker-end="url(#arrowAccent)"/>
+          <text class="dg-label-accent" x="612" y="200">100% cutover</text>
+
+          <rect class="dg-zone-cde" x="320" y="405" width="380" height="205" rx="6"/>
+          <text class="dg-zone-label-cde" x="330" y="420">CDE · PCI-DSS SEGMENTED SUBNET</text>
+          <rect class="dg-box-warn" x="410" y="450" width="200" height="58" rx="6"/>
+          <text class="dg-title" x="510" y="472" text-anchor="middle">RDS — Cardholder Data</text>
+          <text class="dg-sub" x="510" y="487" text-anchor="middle">quarterly ACL / SG audit</text>
+
+          <line class="dg-arrow" x1="510" y1="292" x2="510" y2="448" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="518" y="375">reads / writes</text>
+          <text class="dg-label" x="518" y="388">(crosses PCI-DSS boundary)</text>
+
+          <!-- VPN-gated lane -->
+          <rect class="dg-zone" x="760" y="40" width="260" height="600" rx="8"/>
+          <text class="dg-zone-label" x="772" y="58">VPN-GATED ACCESS</text>
+
+          <rect class="dg-box" x="780" y="75" width="220" height="50" rx="6"/>
+          <text class="dg-title" x="890" y="97" text-anchor="middle">Engineers / On-call</text>
+          <text class="dg-sub" x="890" y="112" text-anchor="middle">connect via VPN</text>
+
+          <rect class="dg-box-accent" x="780" y="155" width="220" height="50" rx="6"/>
+          <text class="dg-title" x="890" y="177" text-anchor="middle">OpenVPN Access Server</text>
+          <text class="dg-sub" x="890" y="192" text-anchor="middle">VPN gateway</text>
+
+          <rect class="dg-box" x="780" y="235" width="220" height="120" rx="6"/>
+          <text class="dg-title" x="890" y="257" text-anchor="middle">Observability Stack</text>
+          <text class="dg-sub" x="890" y="277" text-anchor="middle">Grafana · Prometheus</text>
+          <text class="dg-sub" x="890" y="294" text-anchor="middle">Node Exporter · Uptime Kuma</text>
+          <text class="dg-sub" x="890" y="311" text-anchor="middle">no public endpoints</text>
+
+          <rect class="dg-box" x="780" y="385" width="220" height="50" rx="6"/>
+          <text class="dg-title" x="890" y="407" text-anchor="middle">CloudWatch Alarms</text>
+          <text class="dg-sub" x="890" y="422" text-anchor="middle">CPU / memory thresholds</text>
+
+          <rect class="dg-box-ok" x="780" y="465" width="220" height="50" rx="6"/>
+          <text class="dg-title" x="890" y="487" text-anchor="middle">Slack + Email Alerts</text>
+          <text class="dg-sub" x="890" y="502" text-anchor="middle">on-call notify</text>
+
+          <line class="dg-arrow" x1="890" y1="125" x2="890" y2="153" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="898" y="143">connect</text>
+          <line class="dg-arrow-accent" x1="890" y1="205" x2="890" y2="233" marker-end="url(#arrowAccent)"/>
+          <text class="dg-label-accent" x="898" y="223">VPN-only</text>
+
+          <polyline class="dg-arrow-accent" points="780,180 730,180 730,240 700,240" marker-end="url(#arrowAccent)"/>
+          <text class="dg-label-accent" x="732" y="170">ops access · no bastion</text>
+
+          <polyline class="dg-arrow" points="700,300 740,300 740,295 778,295" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="705" y="288">scrape /metrics</text>
+
+          <polyline class="dg-arrow" points="700,350 745,350 745,410 778,410" marker-end="url(#arrow)"/>
+          <text class="dg-label" x="705" y="343">ALB + ECS metrics</text>
+
+          <line class="dg-arrow-ok" x1="890" y1="435" x2="890" y2="463" marker-end="url(#arrowOk)"/>
+          <text class="dg-label-ok" x="898" y="453">alarm: threshold breached</text>
+
+          <!-- Terraform bar -->
+          <rect class="dg-box" x="15" y="650" width="1005" height="35" rx="6"/>
+          <text class="dg-title-sm" x="517" y="672" text-anchor="middle">Terraform + TerraformOps AI — provisions the VPC/ECS/CDE and enforces tagging &amp; IAM standards</text>
+
+          <line class="dg-arrow-dashed" x1="450" y1="650" x2="450" y2="612" marker-end="url(#arrow)"/>
+          <line class="dg-arrow-dashed" x1="890" y1="650" x2="890" y2="602" marker-end="url(#arrow)"/>
+        </svg>
+      </figure>
+    </div>
+    <figcaption class="dg-caption">How a commit becomes a safe production deploy: Bitbucket builds a Golden Image, ECS runs a native blue/green cutover behind the ALB, cardholder data stays walled off in a PCI-DSS-segmented subnet, and every dashboard is reachable only through the VPN — all of it provisioned by Terraform.</figcaption>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-label">Experience</div>
+    <h2>Six years, one platform, growing scope</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-marker">01</div>
+        <div>
+          <div class="tl-role">Network &amp; IT Security Foundations</div>
+          <div class="tl-meta">2021 · VPN · SSL · ACTIVE DIRECTORY</div>
+          <ul class="tl-desc">
+            <li>Owned VPN provisioning, SSL certificate renewals, and Active Directory hygiene for a fast-growing distributed team.</li>
+            <li>Ran workstation security audits, antivirus/patch validation, and access-point fixes across office sites.</li>
+            <li>Set up the Oregon–Ireland VPN segmentation that later infrastructure work was built on top of.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker">02</div>
+        <div>
+          <div class="tl-role">Infrastructure Scaling &amp; Standardization</div>
+          <div class="tl-meta">2022–2023 · DOCKER · UBUNTU · SECURITY REVIEWS</div>
+          <ul class="tl-desc">
+            <li>Standardized Golden Base Docker images and began the first PCI-DSS-aligned network and security-group reviews.</li>
+            <li>Migrated legacy Ubuntu servers (14.04/16.04 → current LTS) supporting core services with zero downtime.</li>
+            <li>Took over CDE asset inventory reconciliation as the AWS footprint outgrew its documentation.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker">03</div>
+        <div>
+          <div class="tl-role">Observability &amp; Compliance Hardening</div>
+          <div class="tl-meta">2024 · GRAFANA · PROMETHEUS · PCI-DSS</div>
+          <ul class="tl-desc">
+            <li>Audited and locked the observability stack — Grafana, Prometheus, Node Exporter, Uptime Kuma — behind VPN-only access.</li>
+            <li>Led recurring PCI-DSS reviews of the Cardholder Data Environment: architecture, ACLs, and asset inventory.</li>
+            <li>Picked up the SRE label formally as on-call and monitoring work took a larger share of the role.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-marker">04</div>
+        <div>
+          <div class="tl-role">Platform Reliability &amp; AI-Assisted Ops</div>
+          <div class="tl-meta">2025–2026 · ECS BLUE/GREEN · TERRAFORM · CI/CD</div>
+          <ul class="tl-desc">
+            <li>Migrated core fintech services from CodeDeploy blue/green to AWS-native ECS blue/green with traffic-header routing.</li>
+            <li>Built TerraformOps AI, a custom assistant that generates modules and catches misconfigurations before they ship.</li>
+            <li>Automated Bitbucket branch merging and wired Maestro E2E mobile tests into the CI pipeline.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-label">Projects</div>
+    <h2>A few things I've shipped</h2>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">Production Architecture &amp; Containerization</div>
+            <div class="proj-tag">Docker · ECS Fargate · EKS</div>
+          </div>
+          <div class="proj-status prod">PROD</div>
+        </div>
+        <div class="proj-desc">Designed the production architecture and containerized close to 120 services across Docker, ECS Fargate, and Amazon EKS — including ingress controllers and auto-scaling policies that improved resilience and performance.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">Terraform Network Segmentation</div>
+            <div class="proj-tag">Terraform · Staging · CDE · Prod</div>
+          </div>
+          <div class="proj-status prod">−40% PROVISIONING TIME</div>
+        </div>
+        <div class="proj-desc">Architected Terraform-based network segmentation across Staging, the PCI-DSS CDE, and Production, enforcing strict isolation through CI/CD-only deployments with approval gates — cutting manual provisioning time by 40%.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">Zero-Downtime Blue/Green Pipeline</div>
+            <div class="proj-tag">CodePipeline · CodeBuild · CodeDeploy · ECS Fargate</div>
+          </div>
+          <div class="proj-status prod">PROD</div>
+        </div>
+        <div class="proj-desc">Built a production-grade, zero-downtime Blue/Green pipeline with header-based ALB routing, letting QA validate the GREEN environment before cutover — running across Wallet, Payment, Transaction, and Debit services.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">Weighted Traffic Migration</div>
+            <div class="proj-tag">Route 53 · ECS Fargate · EKS</div>
+          </div>
+          <div class="proj-status prod">VERIFIED 50/50</div>
+        </div>
+        <div class="proj-desc">Implemented weighted DNS routing across ECS Fargate and EKS for a controlled platform migration, provisioned via Terraform with ALB access logs shipped to S3 for audit — verified at a 50/50 split across 1,000-request load tests.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">SRE &amp; SLO-Driven Reliability</div>
+            <div class="proj-tag">Prometheus · Grafana · CloudWatch · SLOs</div>
+          </div>
+          <div class="proj-status ongoing">ONGOING</div>
+        </div>
+        <div class="proj-desc">Led SRE initiatives for payment systems — SLO-driven reliability models and end-to-end observability (Grafana, Prometheus, Uptime Kuma, CloudWatch, all VPN-only) that cut operational toil and sped up incident response.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">DevSecOps in the Pipeline</div>
+            <div class="proj-tag">IAM · Secrets Mgmt · SAST</div>
+          </div>
+          <div class="proj-status ongoing">ONGOING</div>
+        </div>
+        <div class="proj-desc">Embedded DevSecOps into the SDLC — IAM policy design, secrets management, automated vulnerability scanning, and static code analysis in CI/CD — plus event-driven automation for image updates and alert routing.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">Multi-Environment CI/CD Pipelines</div>
+            <div class="proj-tag">Bitbucket · Golden Images · Java/Python/Node</div>
+          </div>
+          <div class="proj-status prod">PROD</div>
+        </div>
+        <div class="proj-desc">Designed and stood up CI/CD pipelines promoting services through dev, staging, and prod on standardized Golden Base Docker images — partnering with teams shipping Java, Python, and Node.js to minimize downtime and stabilize builds.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">PCI-DSS CDE Compliance Program</div>
+            <div class="proj-tag">Network ACLs · Asset Inventory</div>
+          </div>
+          <div class="proj-status ongoing">RECURRING</div>
+        </div>
+        <div class="proj-desc">Own the recurring review cycle for the Cardholder Data Environment — architecture reviews, security-group reconciliation against live AWS state, and asset inventory sign-off.</div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-top">
+          <div>
+            <div class="proj-title">TerraformOps AI</div>
+            <div class="proj-tag">Terraform · Google Gem</div>
+          </div>
+          <div class="proj-status prod">SHIPPED 2026</div>
+        </div>
+        <div class="proj-desc">Built a custom AI assistant that generates Terraform modules from requirements, flags misconfigurations and security anti-patterns, and enforces naming/tagging standards before a plan ever runs.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="case-study">
+  <div class="wrap">
+    <div class="section-label">Case Study</div>
+    <div class="case-head">
+      <h2 style="margin-bottom:0;">Wiring CI into mobile E2E testing</h2>
+      <div class="case-status">IN PROGRESS · PILOTING ON iOS</div>
+    </div>
+    <div class="case-sub">mobile-maestro-automation — QA's Maestro E2E suite for Carbon's iOS (carbon-ios-app) and Android (paylater-android) apps</div>
+    <div class="case-grid">
+      <div class="case-block">
+        <h3>The problem</h3>
+        <p>QA's Maestro flow-authoring was mature — organized by squad, tagged, stability-gated, with a <code>ci</code> tag already defined as "the curated subset the pipeline runs on every PR" and a JUnit→Allure reporting script sitting ready. But no pipeline had ever been wired up to use any of it. Every run was still manual, on someone's machine.</p>
+      </div>
+      <div class="case-block">
+        <h3>What made it hard</h3>
+        <ul>
+          <li><b>No hosted runner would do it.</b> iOS needs macOS + Xcode + a simulator; Android needs an SDK + emulator — neither is possible on Bitbucket Cloud's hosted Linux runners, so this meant standing up self-hosted runners first.</li>
+          <li><b>Trigger model wasn't obvious.</b> Gate the app repos directly (carbon-ios-app / paylater-android) post-build, or run a self-contained pipeline in the test repo that builds both apps itself — a real architecture decision, not a config tweak.</li>
+          <li><b>Android had no equivalent tag.</b> Only iOS had a stability-gated <code>ci</code> tag; Android only had smoke/manual, so gating it the same way needed a decision with QA first.</li>
+        </ul>
+      </div>
+      <div class="case-block case-full">
+        <h3>Approach</h3>
+        <p>Scoped the two blocking decisions before writing any pipeline code, then piloted iOS first since it was already stability-gated: build the app → <code>scripts/maestro-test.sh &lt;env-file&gt; ios --include-tags ci --format junit --output report.xml</code> → <code>scripts/allure-regroup.py</code> to regroup results → publish as an Allure report grouped by <b>platform · squad</b>. Test-identity secrets (<code>TEST_*</code> / <code>MAESTRO_*</code>), previously only in 1Password, get provisioned as secured pipeline variables rather than checked-in config. Android extends the same pattern once QA agrees on its tag convention — documented as a handoff rather than blocking the iOS pilot on it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="connect">
+  <div class="wrap connect">
+    <div>
+      <div class="section-label">Connect</div>
+      <h2>Let's talk infrastructure.</h2>
+      <p style="color:var(--text-dim); max-width:50ch;">Open to DevOps, SRE, and solution architecture conversations — reach out on any of these.</p>
+    </div>
+    <div class="connect-row">
+      <a class="btn btn-primary" href="mailto:soyetola@getcarbon.co">Email →</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/tobaoyetola" target="_blank" rel="noopener">LinkedIn →</a>
+      <a class="btn btn-ghost" href="https://github.com/tobaoyetola-sam" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 Toba Oyetola</span>
+  <span>Provisioned with Terraform. Deployed with care.</span>
+</footer>
+
+<script>
+  const lines = document.querySelectorAll('#consoleLog [data-line]');
+  const status = document.getElementById('consoleStatus');
+  const replayBtn = document.getElementById('replayBtn');
+  let timers = [];
+
+  function clearTimers(){ timers.forEach(t => clearTimeout(t)); timers = []; }
+
+  function playSequence(){
+    clearTimers();
+    lines.forEach(l => l.classList.remove('show'));
+    status.classList.remove('show');
+    lines.forEach((line, i) => {
+      timers.push(setTimeout(() => line.classList.add('show'), 350 + i * 500));
+    });
+    timers.push(setTimeout(() => status.classList.add('show'), 350 + lines.length * 500 + 200));
+  }
+
+  replayBtn.addEventListener('click', playSequence);
+  window.addEventListener('load', playSequence);
+</script>
+
+</body>
+</html>
