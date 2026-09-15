@@ -218,22 +218,42 @@
   .dg-arrowhead-ok{fill:var(--ok);}
   figcaption.dg-caption{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); margin-top:14px; max-width:70ch;}
 
-  /* EXPERIENCE */
-  .timeline{display:flex; flex-direction:column; gap:0;}
-  .tl-item{display:grid; grid-template-columns:34px 1fr; gap:20px; padding-bottom:30px; position:relative;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-marker{
-    font-family:var(--mono); font-size:11px; color:var(--accent);
-    width:34px; height:34px; border-radius:50%; border:1px solid var(--accent);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; background:var(--accent-soft);
+  /* EXPERIENCE — status-page uptime log */
+  @keyframes pulseSeg{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .status-summary{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    margin-bottom:36px; padding-bottom:28px; border-bottom:1px solid var(--line);
   }
-  .tl-item:not(:last-child)::before{
-    content:''; position:absolute; left:16px; top:34px; bottom:0; width:1px; background:var(--line);
+  .status-summary-bar{display:flex; gap:3px;}
+  .status-summary-bar .seg{width:6px; height:24px; border-radius:2px; background:var(--ok);}
+  .status-summary-label{font-family:var(--mono); font-size:12px; color:var(--text-dim);}
+  .status-summary-label b{color:var(--ok); font-weight:600;}
+
+  .status-log{display:flex; flex-direction:column;}
+  .status-row{padding:26px 0; border-top:1px solid var(--line);}
+  .status-row:first-child{padding-top:0; border-top:none;}
+  .status-row-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    gap:12px; flex-wrap:wrap; margin-bottom:6px;
   }
-  .tl-role{font-weight:600; font-size:1rem;}
-  .tl-meta{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin:4px 0 10px;}
-  .tl-desc{color:var(--text-dim); max-width:62ch; font-size:.95rem;}
-  .tl-desc li{margin-left:1.1em; margin-bottom:4px;}
+  .status-row-title{font-weight:600; font-size:1.02rem;}
+  .status-pill{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.03em;
+    padding:3px 9px; border-radius:5px; white-space:nowrap; flex-shrink:0;
+  }
+  .status-pill.resolved{color:var(--text-dim); border:1px solid var(--line); background:var(--surface-2);}
+  .status-pill.live{color:var(--accent); border:1px solid rgba(45,212,191,0.4); background:var(--accent-soft);}
+  .status-pill .pulse-dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--accent); margin-right:6px; animation:pulseSeg 1.6s ease-in-out infinite;
+  }
+  .status-row-meta{font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-bottom:12px;}
+  .status-bar{display:flex; gap:3px; margin-bottom:16px;}
+  .status-bar .seg{width:6px; height:20px; border-radius:2px; background:var(--ok);}
+  .status-row.is-live .status-bar .seg{background:var(--accent);}
+  .status-row.is-live .status-bar .seg:last-child{animation:pulseSeg 1.6s ease-in-out infinite;}
+  .status-desc{color:var(--text-dim); max-width:62ch; font-size:.95rem; padding-left:1.1em;}
+  .status-desc li{margin-bottom:4px;}
 
   /* PROJECTS */
   .project-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
@@ -558,55 +578,85 @@
 <section id="experience">
   <div class="wrap">
     <div class="section-label">Experience</div>
-    <h2>Six years, one platform, growing scope</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-marker">01</div>
-        <div>
-          <div class="tl-role">Network &amp; IT Security Foundations</div>
-          <div class="tl-meta">2021 · VPN · SSL · ACTIVE DIRECTORY</div>
-          <ul class="tl-desc">
-            <li>Owned VPN provisioning, SSL certificate renewals, and Active Directory hygiene for a fast-growing distributed team.</li>
-            <li>Ran workstation security audits, antivirus/patch validation, and access-point fixes across office sites.</li>
-            <li>Set up the Oregon–Ireland VPN segmentation that later infrastructure work was built on top of.</li>
-          </ul>
-        </div>
+    <h2>Six years, zero downtime.</h2>
+
+    <div class="status-summary">
+      <div class="status-summary-bar" role="img" aria-label="23 quarters of continuous TechOps ownership, no coverage gaps">
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        <span class="seg"></span><span class="seg"></span><span class="seg"></span>
       </div>
-      <div class="tl-item">
-        <div class="tl-marker">02</div>
-        <div>
-          <div class="tl-role">Infrastructure Scaling &amp; Standardization</div>
-          <div class="tl-meta">2022–2023 · DOCKER · UBUNTU · SECURITY REVIEWS</div>
-          <ul class="tl-desc">
-            <li>Standardized Golden Base Docker images and began the first PCI-DSS-aligned network and security-group reviews.</li>
-            <li>Migrated legacy Ubuntu servers (14.04/16.04 → current LTS) supporting core services with zero downtime.</li>
-            <li>Took over CDE asset inventory reconciliation as the AWS footprint outgrew its documentation.</li>
-          </ul>
+      <div class="status-summary-label"><b>● operational</b> since 2021-01 · 23 quarters · 0 coverage gaps</div>
+    </div>
+
+    <div class="status-log">
+      <div class="status-row">
+        <div class="status-row-head">
+          <div class="status-row-title">Network &amp; IT Security Foundations</div>
+          <div class="status-pill resolved">RESOLVED · 2021</div>
         </div>
+        <div class="status-row-meta">VPN · SSL · ACTIVE DIRECTORY</div>
+        <div class="status-bar" aria-hidden="true">
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        </div>
+        <ul class="status-desc">
+          <li>Owned VPN provisioning, SSL certificate renewals, and Active Directory hygiene for a fast-growing distributed team.</li>
+          <li>Ran workstation security audits, antivirus/patch validation, and access-point fixes across office sites.</li>
+          <li>Set up the Oregon–Ireland VPN segmentation that later infrastructure work was built on top of.</li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-marker">03</div>
-        <div>
-          <div class="tl-role">Observability &amp; Compliance Hardening</div>
-          <div class="tl-meta">2024 · GRAFANA · PROMETHEUS · PCI-DSS</div>
-          <ul class="tl-desc">
-            <li>Audited and locked the observability stack (Grafana, Prometheus, Node Exporter, Uptime Kuma) behind VPN-only access.</li>
-            <li>Led recurring PCI-DSS reviews of the Cardholder Data Environment: architecture, ACLs, and asset inventory.</li>
-            <li>Picked up the SRE label formally as on-call and monitoring work took a larger share of the role.</li>
-          </ul>
+
+      <div class="status-row">
+        <div class="status-row-head">
+          <div class="status-row-title">Infrastructure Scaling &amp; Standardization</div>
+          <div class="status-pill resolved">RESOLVED · 2022–2023</div>
         </div>
+        <div class="status-row-meta">DOCKER · UBUNTU · SECURITY REVIEWS</div>
+        <div class="status-bar" aria-hidden="true">
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        </div>
+        <ul class="status-desc">
+          <li>Standardized Golden Base Docker images and began the first PCI-DSS-aligned network and security-group reviews.</li>
+          <li>Migrated legacy Ubuntu servers (14.04/16.04 → current LTS) supporting core services with zero downtime.</li>
+          <li>Took over CDE asset inventory reconciliation as the AWS footprint outgrew its documentation.</li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-marker">04</div>
-        <div>
-          <div class="tl-role">Platform Reliability &amp; AI-Assisted Ops</div>
-          <div class="tl-meta">2025–2026 · ECS BLUE/GREEN · TERRAFORM · CI/CD</div>
-          <ul class="tl-desc">
-            <li>Migrated core fintech services from CodeDeploy blue/green to AWS-native ECS blue/green with traffic-header routing.</li>
-            <li>Built TerraformOps AI, a custom assistant that generates modules and catches misconfigurations before they ship.</li>
-            <li>Automated Bitbucket branch merging and wired Maestro E2E mobile tests into the CI pipeline.</li>
-          </ul>
+
+      <div class="status-row">
+        <div class="status-row-head">
+          <div class="status-row-title">Observability &amp; Compliance Hardening</div>
+          <div class="status-pill resolved">RESOLVED · 2024</div>
         </div>
+        <div class="status-row-meta">GRAFANA · PROMETHEUS · PCI-DSS</div>
+        <div class="status-bar" aria-hidden="true">
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        </div>
+        <ul class="status-desc">
+          <li>Audited and locked the observability stack (Grafana, Prometheus, Node Exporter, Uptime Kuma) behind VPN-only access.</li>
+          <li>Led recurring PCI-DSS reviews of the Cardholder Data Environment: architecture, ACLs, and asset inventory.</li>
+          <li>Picked up the SRE label formally as on-call and monitoring work took a larger share of the role.</li>
+        </ul>
+      </div>
+
+      <div class="status-row is-live">
+        <div class="status-row-head">
+          <div class="status-row-title">Platform Reliability &amp; AI-Assisted Ops</div>
+          <div class="status-pill live"><span class="pulse-dot"></span>LIVE · 2025–2026</div>
+        </div>
+        <div class="status-row-meta">ECS BLUE/GREEN · TERRAFORM · CI/CD</div>
+        <div class="status-bar" aria-hidden="true">
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        </div>
+        <ul class="status-desc">
+          <li>Migrated core fintech services from CodeDeploy blue/green to AWS-native ECS blue/green with traffic-header routing.</li>
+          <li>Built TerraformOps AI, a custom assistant that generates modules and catches misconfigurations before they ship.</li>
+          <li>Automated Bitbucket branch merging and wired Maestro E2E mobile tests into the CI pipeline.</li>
+        </ul>
       </div>
     </div>
   </div>
